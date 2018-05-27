@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Cormorant+SC);
-
 html {
   position: relative;
   min-height: 100%;
@@ -10,6 +8,11 @@ body {
   margin-bottom: 80px;
   background-image: url("../images/guardian.png")
 
+}
+
+@font-face {
+  font-family: "Cormorant+SC";
+  src: url(https://fonts.googleapis.com/css?family=Cormorant+SC);
 }
 
 #articles {
