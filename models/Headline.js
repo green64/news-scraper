@@ -21,7 +21,6 @@ var headlineSchema = new Schema({
     type: Boolean,
     default: false
   }
-
 });
 var Headline = mongoose.model("Headline", headlineSchema);
 
