@@ -1,4 +1,4 @@
-//load the page fool
+// //load the page fool
 $(document).ready(function () {
   var articleContainer = $(".article-container");
   $(document).on("click", ".btn.save", handleArticleSave);

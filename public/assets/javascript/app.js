@@ -6,7 +6,7 @@ var request = require("request");
 // First, tell the console what server.js is doing
 console.log("\n***********************************\n" +
   "Grabbing article title, summary and urls\n" +
-  "from the medium.com politic page" +
+  "from the guardian.com politic page" +
   "\n***********************************\n");
 
 // Making a request for reddit's "webdev" board. The page's HTML is passed as the callback's third argument

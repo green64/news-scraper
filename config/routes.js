@@ -4,9 +4,9 @@ var headlinesController = require("../controllers/headlines");
 var notesController = require("../controllers/notes");
 
 module.exports = function (router) {
-  //a route to direct readers to the home page
+  //a route to direct readers to the index page
   router.get("/", function (req, res) {
-    res.render('home');
+    res.render('index');
   });
   //second route renders the saved handlebars page
   router.get("/saved", function (req, res) {

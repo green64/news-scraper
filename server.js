@@ -11,8 +11,9 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   //require up Handlebars
   exphbs = require("express-handlebars"),
-  //debugging tool
-  logger = require('morgan'),
+  //logging tools
+  morgan = require('morgan'),
+  logger = require('./logger')
   //scraper tools
   request = require("request"),
   cheerio = require("cheerio");
@@ -25,6 +26,46 @@ var app = express();
 
 //set up Express router
 var router = express.Router();
+//------------------ morgan & winston logging ------------------
+
+var PORT = process.env.PORT || 3000;
+
+app.use(morgan('dev', {
+  skip: function (req, res) {
+      return res.statusCode < 400
+  }, stream: process.stderr
+}));
+
+app.use(morgan('dev', {
+  skip: function (req, res) {
+      return res.statusCode >= 400
+  }, stream: process.stdout
+}));
+
+app.get('/', function (req, res) {
+  logger.debug('Debug statement');
+  logger.info('Info statement');
+  res.render('index');
+});
+
+app.get('/saved', function (req, res) {
+  logger.debug('Debug statement');
+  logger.info('Info statement');
+  res.render('saved');
+});
+
+app.use(function(req, res, next){
+  logger.error('404 page requested');
+  res.status(404).send('This page does not exist!');
+});
+
+app.listen(PORT, function(){
+  logger.info('Example app listening on port ' + PORT);
+});
+
+//------------------end of morgan & winston logging ------------
+
+
 
 //require our routes file
 require("./config/routes")(router);
@@ -35,7 +76,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 //public static file directory
-app.use(express.static(__dirname + "/public"));
+// app.use(express.static(__dirname + "/public"));
+app.use(express.static(process.cwd() + '/public'));
+
 
 // Set Handlebars
 app.engine("handlebars", exphbs({
@@ -67,8 +110,8 @@ db.once('open', function () {
 
 
 
-// Launch App
-var PORT = process.env.PORT || 3000;
-app.listen(PORT, function () {
-  console.log('Running on port: ' + PORT);
-});
+// // Launch App
+// var PORT = process.env.PORT || 3000;
+// app.listen(PORT, function () {
+//   console.log('Running on port: ' + PORT);
+// });

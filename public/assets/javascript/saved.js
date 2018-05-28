@@ -1,5 +1,5 @@
 //nothing runs til page is ready
-$(document).ready(function() {
+// $(document).ready(function() {
 
   var articleContainer = $(".article-container");
 
@@ -165,4 +165,4 @@ $(document).ready(function() {
       bootbox.hideAll();
     });
   }
-});
+// });
