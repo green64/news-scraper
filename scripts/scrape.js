@@ -13,12 +13,12 @@ var scrape = function (cb) {
     var articles = [];
 
     // With cheerio, find every page article 
-    $(".fc-item__title").each(function (i, element) {
+    $(".theme-summary").each(function (i, element) {
 
       //Headline - the title of the article
-      var head = $(this).children(".js-headline-text").text().trim();
+      var head = $(this).children(".story-heading").text().trim();
       //Summary - a short summary of the article
-      var summary = $(this).children(".fc-item__kicker").text().trim();
+      var summary = $(this).children(".summary").text().trim();
       //URL - the url to the original article
       var url = $(this).children().attr("href");
 

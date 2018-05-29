@@ -1,6 +1,6 @@
 // Dependencies
 //handles node framework
-var express = require("express"),
+const express = require("express"),
   //object modeling tool generates data models
   mongoose = require("mongoose"),
   //implements mongodb API
@@ -13,78 +13,81 @@ var express = require("express"),
   exphbs = require("express-handlebars"),
   //logging tools
   morgan = require('morgan'),
-  logger = require('./logger')
+  logger = require('./logger'),
   //scraper tools
-  request = require("request"),
   cheerio = require("cheerio");
 
-
 //set up port listener
+var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
 
-//set up Express router
+// set up Express router
 var router = express.Router();
-//------------------ morgan & winston logging ------------------
 
-var PORT = process.env.PORT || 3000;
-
-app.use(morgan('dev', {
-  skip: function (req, res) {
-      return res.statusCode < 400
-  }, stream: process.stderr
-}));
-
-app.use(morgan('dev', {
-  skip: function (req, res) {
-      return res.statusCode >= 400
-  }, stream: process.stdout
-}));
-
-app.get('/', function (req, res) {
-  logger.debug('Debug statement');
-  logger.info('Info statement');
-  res.render('index');
-});
-
-app.get('/saved', function (req, res) {
-  logger.debug('Debug statement');
-  logger.info('Info statement');
-  res.render('saved');
-});
-
-app.use(function(req, res, next){
-  logger.error('404 page requested');
-  res.status(404).send('This page does not exist!');
-});
-
-app.listen(PORT, function(){
-  logger.info('Example app listening on port ' + PORT);
-});
-
-//------------------end of morgan & winston logging ------------
-
-
-
-//require our routes file
+// Require our routes file pass our router object
 require("./config/routes")(router);
 
-// Use body-parser for handling form submissions
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-
 //public static file directory
-// app.use(express.static(__dirname + "/public"));
-app.use(express.static(process.cwd() + '/public'));
-
+app.use(express.static(__dirname +'/public'));
 
 // Set Handlebars
 app.engine("handlebars", exphbs({
   defaultLayout: "main"
 }));
 app.set("view engine", "handlebars");
+
+// Use body-parser for handling form submissions
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
+// Load morgan middlware
+app.use(morgan('dev', {
+  skip: function (req, res) {
+      return res.statusCode < 400
+  }, stream: process.stderr
+}));
+
+// Make sure all request go through our router middleware
+app.use(router);
+
+// Port that express should listen on
+app.listen(PORT, function () {
+  console.log('Running on port: ' + PORT);
+});
+
+
+
+// app.get('/', function (req, res) {
+//   logger.debug('Debug statement');
+//   logger.info('Info statement');
+//   res.render('index');
+// });
+
+// app.get('/saved', function (req, res) {
+//   logger.debug('Debug statement');
+//   logger.info('Info statement');
+//   res.render('saved');
+// });
+
+// app.use(function(req, res, next){
+//   logger.error('404 page requested');
+//   res.status(404).send('This page does not exist!');
+// });
+
+// app.listen(PORT, function(){
+//   logger.info('Example app listening on port ' + PORT);
+// });
+
+//------------------end of morgan & winston logging ------------
+
+
+
+
+
+
 
 
 //  ---------------Database configuration--------------------
@@ -107,11 +110,3 @@ db.once('open', function () {
   console.log('Mongoose connection successful.');
 });
 //  -----------------End db config----------------------------
-
-
-
-// // Launch App
-// var PORT = process.env.PORT || 3000;
-// app.listen(PORT, function () {
-//   console.log('Running on port: ' + PORT);
-// });

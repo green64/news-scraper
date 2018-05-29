@@ -1,5 +1,4 @@
 var scrape = require("../scripts/scrape");
-
 var headlinesController = require("../controllers/headlines");
 var notesController = require("../controllers/notes");
 
@@ -15,6 +14,7 @@ module.exports = function (router) {
   //fetch articles
   router.get("/api/fetch", function (req, res) {
     headlinesController.fetch(function (err, docs) {
+      console.log('Testing docs:', JSON.stringify(docs, null, 2))
       if (!docs || docs.insertedCount === 0) {
         res.json({
           message: "No new articles today. Check tomorrow!"
