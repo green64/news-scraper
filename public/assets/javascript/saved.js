@@ -45,9 +45,9 @@
         "</a>",
         "</h3>",
         "</div>",
-        "<div class='panel-body'>",
-        article.summary,
-        "</div>",
+        // "<div class='panel-body'>",
+        // article.summary,
+        // "</div>",
         "</div>"
       ].join(""));
     panel.data("_id", article._id);

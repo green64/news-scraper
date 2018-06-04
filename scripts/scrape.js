@@ -6,37 +6,35 @@ var cheerio = require("cheerio");
 
 var scrape = function (cb) {
 
-  request("https://www.theguardian.com/us", function (err, res, body) {
+  request('https://www.theguardian.com/us', function (error, response, data) {
+    if (!error && response.statusCode == 200) {
+      var $ = cheerio.load(data);
 
-    var $ = cheerio.load(body);
+      var articles = [];
 
-    var articles = [];
+      $('span.fc-item__kicker').each(function (i, element) {
+        var headline = $(this).parent('.fc-item__link');
+        console.log(headline.text());
 
-    // With cheerio, find every page article 
-    $(".theme-summary").each(function (i, element) {
+        var url = headline.attr('href');
+        console.log(url);
 
-      //Headline - the title of the article
-      var head = $(this).children(".story-heading").text().trim();
-      //Summary - a short summary of the article
-      var summary = $(this).children(".summary").text().trim();
-      //URL - the url to the original article
-      var url = $(this).children().attr("href");
+        if(headline && url) {
+        //   var headNeat = headline.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+        // // var summaryNeat = summary.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+        //   var urlNeat = url.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
-      if (head && summary && url) {
-
-        // var headNeat = title.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-        // var summaryNeat = summary.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-        // var urlNeat = url.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-        
-        var dataToAdd = {
-          headline: head,
-          summary: summary,
-          url: url
-        };
-        articles.push(dataToAdd);
-      }
-    });
-    cb(articles);
+          var dataToAdd = {
+            headline: headline,
+            url: url
+          };
+          // console.log(dataToAdd);
+          articles.push(dataToAdd);
+        }
+      });
+      cb(articles);
+    };
   });
 };
+
 module.exports = scrape;

@@ -1,8 +1,9 @@
 // //load the page fool
 $(document).ready(function () {
   var articleContainer = $(".article-container");
+
   $(document).on("click", ".btn.save", handleArticleSave);
-  $(document).on("click", ".scrape-new", handleArticleScrape);
+  $(".scrape-new").click(handleArticleScrape);
 
   initPage();
 
@@ -39,9 +40,9 @@ $(document).ready(function () {
         "</a>",
         "</h3>",
         "</div>",
-        "<div class='panel-body'>",
-        article.summary,
-        "</div>",
+        // "<div class='panel-body'>",
+        // article.summary,
+        // "</div>",
         "</div>"
       ].join(""));
     panel.data("_id", article._id);
@@ -81,6 +82,7 @@ $(document).ready(function () {
       });
   }
   function handleArticleScrape() {
+    console.log('clicked scrape')
     $.get("/api/fetch")
       .then(function(data) {
         initPage();

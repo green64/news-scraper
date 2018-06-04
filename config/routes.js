@@ -13,6 +13,7 @@ module.exports = function (router) {
   });
   //fetch articles
   router.get("/api/fetch", function (req, res) {
+    console.log('api request received')
     headlinesController.fetch(function (err, docs) {
       console.log('Testing docs:', JSON.stringify(docs, null, 2))
       if (!docs || docs.insertedCount === 0) {
