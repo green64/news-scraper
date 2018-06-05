@@ -55,16 +55,12 @@
   }
   function renderEmpty() {
     var emptyAlert =
-      $(["<div class='alert alert-warning text-center'>",
+      $(["<div class='alert alert-warning text-center rounded'>",
         "<h4>Uh oh. Looks like we don't have any saved articles.</h4>",
         "</div>",
-        "<div class='panel panel-default'>",
-        "<div class='panel-heading text-center'>",
-        "<h3>Would you like to browse available articles?</h3>",
-        "</div>",
-        "<div class='panel-body text-center'>",
-        "<h4><a class='scrape-new'>Try Scraping new articles</a></h4>",
-        "<h4><a href='/'>Browse articles</a></h4>",
+        "<div class='panel panel-default rounded'>",
+        "<div class='panel-body text-center py-3 rounded'>",
+        "<h4>Try <a href='/' class='scrape-new'>scraping new articles</a> or <a href='/'>browse articles</a>.</h4>",
         "</div>",
         "</div>"
       ].join(""));

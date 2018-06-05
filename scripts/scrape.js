@@ -1,30 +1,31 @@
 //scrape script
 
 //Require request and cheerio to makes scrapes work
-var request = require("request");
-var cheerio = require("cheerio");
+let request = require("request");
+let cheerio = require("cheerio");
 
-var scrape = function (cb) {
+let scrape = function (cb) {
 
   request('https://www.theguardian.com/us', function (error, response, data) {
     if (!error && response.statusCode == 200) {
-      var $ = cheerio.load(data);
+      let $ = cheerio.load(data);
 
-      var articles = [];
+      let articles = [];
 
-      $('span.fc-item__kicker').each(function (i, element) {
-        var headline = $(this).parent('.fc-item__link');
-        console.log(headline.text());
+      $('a.fc-item__link').each(function (i, element) {
+        // let a = $(this).prev();
+        let headline = $(this).text();
+        // console.log(headline);
 
-        var url = headline.attr('href');
-        console.log(url);
+        let url = $(this).attr('href');
+        // console.log(url);
 
         if(headline && url) {
         //   var headNeat = headline.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         // // var summaryNeat = summary.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         //   var urlNeat = url.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
-          var dataToAdd = {
+          let dataToAdd = {
             headline: headline,
             url: url
           };
@@ -33,6 +34,7 @@ var scrape = function (cb) {
         }
       });
       cb(articles);
+      console.log(articles)
     };
   });
 };

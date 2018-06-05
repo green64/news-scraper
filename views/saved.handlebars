@@ -1,16 +1,9 @@
 <nav class="navbar navbar-inverse bgwhite border border-secondary rounded">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">Saved Articles</a>
+    <div class="navbar-header py-3">
+      <a class="navbar-brand p-3 rounded btn btn-primary scrape-new" href="/saved">Saved Articles</a>
+      <a class="navbar-brand p-3 rounded btn btn-secondary" href="/">Scraper Home</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active">
-        <a href="/">Home</a>
-      </li>
-      <li class="active">
-        <a href="/saved">Saved articles</a>
-      </li>
-    </ul>
   </div>
 </nav>
 <div class="jumbotron text-center">
@@ -25,11 +18,13 @@
 </div>
 <div class="container-fluid article-container">
 </div>
-<footer class="footer">
-  <div class="container">
-    <p>The Guardian Mongo Scraper</p>
-  </div>
-</footer>
+<div class="container text-center">
+  <footer class="pt-3 footer rounded">
+    <div class="">
+      <p>The Guardian Mongo Scraper</p>
+    </div>
+  </footer>
+</div>
 
 <!-- Link in jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

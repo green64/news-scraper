@@ -1,4 +1,8 @@
 var scrape = require("../scripts/scrape");
+var makeDate = require("../scripts/date")
+
+var headline = require("../models/Headline");
+
 var headlinesController = require("../controllers/headlines");
 var notesController = require("../controllers/notes");
 
