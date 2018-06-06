@@ -36,19 +36,25 @@ $(document).ready(function() {
 
   function createPanel(article) {
     var panel =
-      $(["<div class='panel panel-default'>",
+      $(["<div class='panel panel-default border'>",
         "<div class='panel-heading'>",
-        "<h3>",
+        "<h4>",
         article.headline,
-        "<a class='btn btn-danger delete'>",
-        "Delete from Saved",
-        "</a>",
-        "<a class='btn btn-info notes'>Article Notes</a>",
-        "</h3>",
+        "</h4>",
         "</div>",
         "<div class='panel-body'>",
+        "<h5>", 
         article.summary,
+        "</h5>",
         "</div>",
+        "<div>",
+        "<p class='url'>",
+        article.url,
+        "</p>",
+        "</div>",
+        "<a class='btn btn-danger delete mb-2'>",
+        "Delete from Saved",
+        "</a>",
         "</div>"
       ].join(""));
     panel.data("_id", article._id);

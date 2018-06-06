@@ -2,7 +2,8 @@
 $(document).ready(function () {
   var articleContainer = $(".article-container");
 
-  $(".btn.save").click(handleArticleSave);
+  //attach click function to document so doc has to be there
+  $(document).on("click", ".save", handleArticleSave);
   $(".scrape-new").click(handleArticleScrape);
 
   initPage();
@@ -78,8 +79,8 @@ $(document).ready(function () {
     var articleToSave = $(this).parents(".panel").data();
     articleToSave.saved = true;
     $.ajax({
-      method: "PATCH",
-      url: "/api/headlines",
+      method: "POST",
+      url: "/api/headlines/" + articleToSave._id,
       data: articleToSave
     })
       .then(function(data) {
