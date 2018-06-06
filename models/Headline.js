@@ -8,10 +8,10 @@ var headlineSchema = new Schema({
     required: true,
     unique: true
   },
-  // summary: {
-  //   type: String,
-  //   required: true
-  // },
+  summary: {
+    type: String,
+    required: true,
+  },
   url: {
     type: String,
     required: true,

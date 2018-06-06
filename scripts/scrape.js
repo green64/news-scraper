@@ -13,20 +13,23 @@ let scrape = function (cb) {
       let articles = [];
 
       $('a.fc-item__link').each(function (i, element) {
-        // let a = $(this).prev();
-        let headline = $(this).text();
-        // console.log(headline);
+        var headline = $(this).children('.fc-item__kicker').text();
+        console.log(headline); 
 
-        let url = $(this).attr('href');
-        // console.log(url);
+        var summary = $(this).children().children('.js-headline-text').text();
+        console.log(summary); 
 
-        if(headline && url) {
-        //   var headNeat = headline.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-        // // var summaryNeat = summary.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-        //   var urlNeat = url.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+        var url = $(this).attr('href');
+        console.log(url);
+
+        if(headline && summary && url) {
+          // var headNeat = headline.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+          // var summaryNeat = summary.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+          // var urlNeat = url.replace(/\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
           let dataToAdd = {
             headline: headline,
+            summary: summary,
             url: url
           };
           // console.log(dataToAdd);

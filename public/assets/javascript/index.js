@@ -2,7 +2,7 @@
 $(document).ready(function () {
   var articleContainer = $(".article-container");
 
-  $(document).on("click", ".btn.save", handleArticleSave);
+  $(".btn.save").click(handleArticleSave);
   $(".scrape-new").click(handleArticleScrape);
 
   initPage();
@@ -23,7 +23,7 @@ $(document).ready(function () {
   //creates empty array of article panel then pushes articles in
   function renderArticles(articles) {
     var articlePanels = [];
-    for (var i = 0; i < articles.length; i++) {
+    for (var i = 0; i < articles.length; i++) {  
       articlePanels.push(createPanel(articles[i]));
     }
     articleContainer.append(articlePanels);
@@ -31,18 +31,25 @@ $(document).ready(function () {
 
   function createPanel(article) {
     var panel =
-      $(["<div class='panel panel-default'>",
+      $(["<div class='panel panel-default border'>",
         "<div class='panel-heading'>",
-        "<h3>",
+        "<h4>",
         article.headline,
-        "<a class='btn btn-success save'>",
+        "</h4>",
+        "</div>",
+        "<div class='panel-body'>",
+        "<h5>",
+        article.summary,
+        "</h5>",
+        "</div>",
+        "<div>",
+        "<p class='url'>",
+        article.url,
+        "</p>",
+        "</div>",
+        "<a class='btn btn-success save mb-2'>",
         "Save article",
         "</a>",
-        "</h3>",
-        "</div>",
-        // "<div class='panel-body'>",
-        // article.summary,
-        // "</div>",
         "</div>"
       ].join(""));
     panel.data("_id", article._id);
@@ -69,7 +76,7 @@ $(document).ready(function () {
 
   function handleArticleSave() {
     var articleToSave = $(this).parents(".panel").data();
-    articlesToSave.saved = true;
+    articleToSave.saved = true;
     $.ajax({
       method: "PATCH",
       url: "/api/headlines",
@@ -82,7 +89,6 @@ $(document).ready(function () {
       });
   }
   function handleArticleScrape() {
-    console.log('clicked scrape')
     $.get("/api/fetch")
       .then(function(data) {
         initPage();

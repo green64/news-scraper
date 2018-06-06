@@ -1,13 +1,13 @@
 //nothing runs til page is ready
-// $(document).ready(function() {
+$(document).ready(function() {
 
   var articleContainer = $(".article-container");
 
   //event listeners
-  $(document).on("click", ".btn.delete", handleArticleDelete);
-  $(document).on("click", ".btn.notes", handleArticleNotes);
-  $(document).on("click", ".btn.save", handleNoteSave);
-  $(document).on("click", ".btn.note-delete", handleNoteDelete);
+  $(".btn.delete").click(handleArticleDelete);
+  $(".btn.notes").click(handleArticleNotes);
+  $(".btn.save").click(handleNoteSave);
+  $(".btn.note-delete").click(handleNoteDelete);
 
   initPage();
 
@@ -40,14 +40,15 @@
         "<div class='panel-heading'>",
         "<h3>",
         article.headline,
-        "<a class='btn btn-success save'>",
-        "Save article",
+        "<a class='btn btn-danger delete'>",
+        "Delete from Saved",
         "</a>",
+        "<a class='btn btn-info notes'>Article Notes</a>",
         "</h3>",
         "</div>",
-        // "<div class='panel-body'>",
-        // article.summary,
-        // "</div>",
+        "<div class='panel-body'>",
+        article.summary,
+        "</div>",
         "</div>"
       ].join(""));
     panel.data("_id", article._id);
@@ -59,8 +60,11 @@
         "<h4>Uh oh. Looks like we don't have any saved articles.</h4>",
         "</div>",
         "<div class='panel panel-default rounded'>",
+        "<div class='panel-heading text-center'>",
+        "<h3>Would you like to browse articles?</h3>",
+        "</div>",
         "<div class='panel-body text-center py-3 rounded'>",
-        "<h4>Try <a href='/' class='scrape-new'>scraping new articles</a> or <a href='/'>browse articles</a>.</h4>",
+        "<h4><a href='/'>Browse articles</a></h4>",
         "</div>",
         "</div>"
       ].join(""));
@@ -161,4 +165,4 @@
       bootbox.hideAll();
     });
   }
-// });
+});
