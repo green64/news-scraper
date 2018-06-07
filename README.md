@@ -31,4 +31,4 @@ I also learned the danger of ad hoc deletion. I forgot some classes in my Handle
 
 I worked on this project probably more than any to date. But I learned so much. When it comes to databases, I think I actually prefer working with MySQL because it's strict. I never thought I'd say this but I like structure (when it comes to databases anyway)!
 
-Have fun checking out the app, and be sure to save an article to see that marvelous save route in action!
+Have fun checking out the app, and be sure to save an article &mdash; then delete it &mdash; to see those marvelous routes in action!
