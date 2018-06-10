@@ -1,5 +1,5 @@
 # Mongo Scraper
-[Mongo Scraper app](hhttps://immense-depths-69377.herokuapp.com/)
+[Mongo Scraper app](https://immense-depths-69377.herokuapp.com/)
 
 This app uses Mongoose and Cheerio to scrape the news into a Mongo database.
 
@@ -28,6 +28,8 @@ var url = $(this).attr('href');
 console.log(url);
 ```
 I also learned the danger of ad hoc deletion. I forgot some classes in my Handlebars template actually told the scraper where to put the object. Whoops. I also learned the computer doesn't know  ```articleToSave``` and ```articlesToSave``` is a typo. Double whoops.
+
+## Conclusion
 
 I worked on this project probably more than any to date. But I learned so much. When it comes to databases, I think I actually prefer working with MySQL because it's strict. I never thought I'd say this but I like structure (when it comes to databases anyway)!
 
